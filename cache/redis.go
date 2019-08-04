@@ -3,6 +3,8 @@ package cache
 import (
 	"github.com/gomodule/redigo/redis"
 	"time"
+	"fmt"
+	"os"
 )
 
 // Redis连接池实例
@@ -39,6 +41,9 @@ func GetConn(pool *redis.Pool) (redis.Conn) {
 }
 
 func Redis () {
-	pool := newPool("localhost", "6379", "")
+	fmt.Println(os.Getenv("REDIS_IP"))
+	pool := newPool(os.Getenv("REDIS_IP"), 
+	os.Getenv("REDIS_PORT"), 
+	os.Getenv("REDIS_PW"))
 	RedisPool = pool
 }

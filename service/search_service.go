@@ -4,7 +4,6 @@ import (
 	"lcb-go/cache"
 	"github.com/gomodule/redigo/redis"
 	"encoding/json"
-	"fmt"
 )
 
 type SearchService struct {
@@ -19,7 +18,6 @@ func (service *SearchService) Search() map[string]string {
 	
 	key, _ := json.Marshal(service.Phone + ":" + service.Name)
 	value, err := redis.Bytes(conn.Do("GET", key))
-	fmt.Println(value)
 	if err == nil {
 		 var imap map[string]string
 		 errShal := json.Unmarshal(value, &imap)
