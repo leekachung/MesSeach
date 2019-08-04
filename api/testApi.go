@@ -1,13 +1,13 @@
 package api
 
 import (
+	"lcb-go/serializer"
 	"github.com/gin-gonic/gin"
 )
 
 func Ping (c *gin.Context) {
-		data := map[string]interface{}{
-			"lang": "理解错",
-			"tag": "15217705222",
-		}
-		c.JSON(200, data)
+	c.JSON(200, serializer.Response{
+		Status: 0,
+		Msg:    "Pong",
+	})
 }

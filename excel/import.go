@@ -3,6 +3,7 @@ package excel
 import (
 	"lcb-go/cache"
 	"fmt"
+	"encoding/json"
 	"github.com/360EntSecGroup-Skylar/excelize"
 )
 
@@ -53,9 +54,20 @@ func Import() {
 
 	// add data to redis
 	for i := range c {
-		// var key string
-		// var value string
-		// conn.Do("SETNX", key, value)
-		fmt.Println(i)
+		key, _ := json.Marshal(i[0] + ":" + i[1])
+		value := make(map[string]string)
+		value["no"] = i[2]
+		value["m_seat"] = i[3]
+		value["l_seat"] = i[4]
+		value["b_seat"] = i[5]
+		/*
+		value["a_seat"] = i[6]
+		value["e_seat"] = i[7]
+		value["hotel"] = i[8]
+		value["room"] = i[9]
+		value["car"] = i[10]
+		*/
+		data, _ := json.Marshal(value)
+		conn.Do("SETNX", key, data)
 	}
 }
