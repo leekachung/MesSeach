@@ -21,3 +21,12 @@ Golang实战上手
 - 动态管理Redis资源
 - 支持导入excel
 - 提供信息查询的接口
+
+# API说明
+- 请求方式 `GET`
+
+- 请求地址 `ip:8080/api/v1/info`
+
+- 请求携带参数
+	- phone
+	- name
